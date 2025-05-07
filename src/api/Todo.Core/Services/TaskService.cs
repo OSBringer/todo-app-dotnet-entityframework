@@ -8,9 +8,9 @@ namespace Todo.Core.Services
 {
     public sealed class TaskService : ITaskService
     {
-        private readonly MariaDbContext _dbContext;
+        private readonly AzureSqlDbContext _dbContext;
 
-        public TaskService(MariaDbContext dbContext)
+        public TaskService(AzureSqlDbContext dbContext)
         {
             _dbContext = dbContext;
         }
