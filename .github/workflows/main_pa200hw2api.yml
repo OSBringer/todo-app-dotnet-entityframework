@@ -68,12 +68,13 @@ jobs:
       - name: Verify Connection String
         run: |
             echo "Deploying to server..."
-            if [ -z "$TODO_DATABASE_CONNECTION_STRING" ]; then
-                echo "Error: TODO_DATABASE_CONNECTION_STRING is not set."
+            if (-not $env:TODO_DATABASE_CONNECTION_STRING) {
+                Write-Error "Error: TODO_DATABASE_CONNECTION_STRING is not set."
                 exit 1
-            else
+            } else {
                 echo "TODO_DATABASE_CONNECTION_STRING is set."
-            fi
+            }
+
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
