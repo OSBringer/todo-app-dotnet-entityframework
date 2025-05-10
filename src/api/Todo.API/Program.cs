@@ -12,11 +12,11 @@ builder.Services.AddDbContext<AzureSqlDbContext>(options =>
 builder.Services.AddScoped<ITaskService, TaskService>();
 builder.Services.AddControllers();
 
-var app = builder.Build();
-
-
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+var app = builder.Build();
+
 
 
 app.UseSwagger();
