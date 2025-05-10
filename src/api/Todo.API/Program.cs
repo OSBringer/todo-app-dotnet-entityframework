@@ -5,9 +5,10 @@ using Todo.Core.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.  
-builder.Services.AddDbContextPool<AzureSqlDbContext>(options => options
-              .UseSqlServer(builder.Configuration.GetConnectionString("TodoDatabase")));
+
+ builder.Services.AddDbContext<AzureSqlDbContext>(options =>
+         options.UseSqlServer(Environment.GetEnvironmentVariable("TODO_DATABASE_CONNECTION_STRING")));
+
 builder.Services.AddScoped<ITaskService, TaskService>();
 builder.Services.AddControllers();
 
