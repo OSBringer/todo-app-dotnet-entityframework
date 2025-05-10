@@ -5,8 +5,10 @@ using Todo.Core.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
+Console.WriteLine("Starting Todo API...");
+Console.WriteLine("Environment: {0}", Environment.GetEnvironmentVariable("TODO_DATABASE_CONNECTION_STRING"));
 
- builder.Services.AddDbContext<AzureSqlDbContext>(options =>
+builder.Services.AddDbContext<AzureSqlDbContext>(options =>
          options.UseSqlServer(Environment.GetEnvironmentVariable("TODO_DATABASE_CONNECTION_STRING")));
 
 builder.Services.AddScoped<ITaskService, TaskService>();
