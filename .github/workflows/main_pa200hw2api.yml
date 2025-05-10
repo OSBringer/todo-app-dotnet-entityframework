@@ -65,7 +65,15 @@ jobs:
           client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_F2112B8A93B34DAFB990A06C00D76799 }}
           tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_CE9AB6EF222C45C399C1D7684628B28E }}
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_A97772D2DC444B638239B56BFBD262C2 }}
-
+      - name: Verify Connection String
+        run: |
+            echo "Deploying to server..."
+            if [ -z "$TODO_DATABASE_CONNECTION_STRING" ]; then
+                echo "Error: TODO_DATABASE_CONNECTION_STRING is not set."
+                exit 1
+            else
+                echo "TODO_DATABASE_CONNECTION_STRING is set."
+            fi
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
