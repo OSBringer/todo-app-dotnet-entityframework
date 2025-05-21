@@ -5,9 +5,15 @@ using Todo.Core.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
+var connectionString = Environment.GetEnvironmentVariable("TODO_DATABASE_CONNECTION_STRING");
+if (string.IsNullOrWhiteSpace(connectionString))
+{
+    throw new InvalidOperationException("The environment variable 'TODO_DATABASE_CONNECTION_STRING' is not set or is empty.");
+}
 
 builder.Services.AddDbContext<AzureSqlDbContext>(options =>
-         options.UseSqlServer(Environment.GetEnvironmentVariable("TODO_DATABASE_CONNECTION_STRING")));
+    options.UseSqlServer(connectionString));
+
 
 builder.Services.AddScoped<ITaskService, TaskService>();
 builder.Services.AddControllers();
